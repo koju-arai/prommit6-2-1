@@ -1,4 +1,4 @@
-package com.example.memos.models.entity;
+package com.example.memos.models.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -22,9 +22,9 @@ public class MemoTagEntity {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "memo_id", nullable = false)
-  private MemoEntity memo;
+  private Memos memo;
   
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "tag_id", nullable = false)
-  private MemoEntity tag;
+  private Memos tag;
 }
