@@ -28,6 +28,4 @@ public abstract class BaseEntity {
   @Column(nullable = false, name = "updated_at")
   private LocalDateTime updatedAt;
   
-  
-  
 }
