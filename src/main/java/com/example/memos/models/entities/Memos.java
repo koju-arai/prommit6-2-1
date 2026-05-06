@@ -1,7 +1,7 @@
 package com.example.memos.models.entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
@@ -31,6 +31,6 @@ public class Memos extends BaseEntity {
       joinColumns = @JoinColumn(name = "memo_id"),
       inverseJoinColumns = @JoinColumn(name = "tag_id")
   )
-  private List<Tags> tags = new ArrayList<>();
+  private Set<Tags> tags = new HashSet<>();
   
 }
