@@ -4,7 +4,6 @@ import org.springframework.data.jpa.domain.Specification;
 import com.example.memos.models.entities.Memos;
 import com.example.memos.models.entities.Tags;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import jakarta.persistence.criteria.Join;
 
@@ -35,6 +34,5 @@ public class MemoSpecification {
 	       Join<Memos, Tags> tagsJoin = root.join("tags");
 	       return tagsJoin.get("id").in(tagIds);
 		};
-  }
-  
+  }  
 }
