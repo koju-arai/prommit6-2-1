@@ -11,7 +11,6 @@ import com.example.memos.models.entities.Memos;
 import java.time.LocalDateTime;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Optional;
 
 @Controller
@@ -28,13 +27,16 @@ public class MemoController {
     @RequestParam(required = false) LocalDateTime endAt,
     Model model) {
 	  List<Memos> memos = memoService.findMemo(keyword, tagIds, startAt, endAt);
+	  model.addAttribute("memos", memos);
 	  return "memos/list";
   }
   
   @GetMapping("/detail")
   public String getMemoById(
-  @RequestParam(required = true) Long id) {
-    Optional<Memos> memo = memoService.findById(id);
+  @RequestParam(required = true) Long id,
+  Model model) {
+    Optional<Memos> memos = memoService.findById(id);
+    model.addAttribute("memos", memos.orElseThrow());
     return "memo/detail";
   }
   

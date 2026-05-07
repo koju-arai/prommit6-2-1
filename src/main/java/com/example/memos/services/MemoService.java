@@ -3,12 +3,10 @@ package com.example.memos.services;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.memos.repositories.MemoRepository;
-import com.example.memos.models.entities.BaseEntity;
 import com.example.memos.models.entities.Memos;
 import org.springframework.data.jpa.domain.Specification;
 import com.example.memos.specification.MemoSpecification;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
