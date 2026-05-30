@@ -1,0 +1,13 @@
+<section th:object="${memos}">
+<p th:text="${title}"></p>
+<p>登録日</p>
+<p th:text="${updatedAt}"></p>
+
+<p>タグ</p>
+<ul th:each="tag:${tags}">
+  <li th:text="${tag.name}"></li>
+</ul>
+<p th:text="*{detail}"></p>
+<a th:href="@{/}">戻る</a>
+
+</section>

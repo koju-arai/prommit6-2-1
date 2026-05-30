@@ -1,0 +1,364 @@
+body{
+	padding: 30px 100px;
+}
+header {
+	margin-bottom: 50px;
+}
+ul {
+  list-style: none; 
+  padding-left: 0;  
+  margin: 0;        
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+.flex {
+	display: flex;
+}
+.title {
+  border-left: 5px solid blue;
+  padding:0 0 0 10px;
+  display: flex;
+  align-items: center;
+  margin: 0 0 50px 0;
+}
+
+.search-title form {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.search-title input {
+	display: block;
+	width: 300px;
+	line-height: 30px;
+	border-radius: 5px;
+}
+
+.search-title button {
+	display: block;
+	background-color: rgb(105,174,246);
+	color: white;
+	width: 90px;
+	height: 30px;
+	border: none;
+}
+.data-refinement {
+	display: flex;	
+}
+header {
+	display: flex;
+}
+button.switch {
+	background-color: rgb(61,184,210);
+	border: none;
+	border-radius: 5px;
+	height: 25px;
+	width: 90px;
+}
+ul.data-refinement {
+	padding-top: 5px;
+	margin-left: 30px;
+}
+ul.data-refinement li{
+	width: 120px;
+	position: relative;
+}
+ul.data-refinement .button-box {
+	display: flex;
+	justify-content:center;
+	gap: 20px;
+}
+ul.data-refinement .button-box button {
+	height: 30px;
+	width: 100px;
+	border-radius: 15px;
+	border: none;
+	color: white;
+}
+ul.data-refinement .button-box button.cancel {
+	background-color: rgb(157,157,157);
+}
+ul.data-refinement .button-box button[type="submit"] {
+	background-color: rgb(61,184,210);
+}
+.filter-container {
+	position: absolute;
+	display: none;
+	right: -30px;
+	top: 40px;
+	z-index: 1;
+	width: 400px;
+	padding: 30px 10px 15px;
+	filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
+}
+.filter-container::after {
+	content: "";
+	position: absolute;
+	top: 15px;
+	left: 0;
+	width: 100%;
+	height: calc(100% - 15px);
+	background-color: white;
+	z-index: -1;             
+	border-radius: 10px;
+}
+.filter-container::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 15px;
+	background-color: white;
+	z-index: -1;
+	clip-path: polygon(72% 15px, 75% 0, 78% 15px);
+}
+.filter-container .sub-title {
+	color: rgb(4,62,128);
+	font-weight: bold;
+	font-size: 12px;
+	margin: 0 0 5px;
+}
+.filter-container label {
+	color: rgb(4,62,128);
+	font-size: 10px;
+}
+
+.updated-date label, .updated-date input{
+	display: block;
+}
+.date-box {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+}
+.date-box span{
+	display: block;
+	height: fit-content;
+	font-size: 10px;
+	margin-bottom: 5px;
+	width: 30px;
+	text-align: center;
+}
+.input-date {
+	flex: 1 1 0;
+	min-width: 0;
+}
+.input-date input {
+	display: block;
+	width: 100%;
+	height: 25px;
+    box-sizing: border-box;
+	min-width: 0;
+}
+.tag-display {
+	border: black solid 1px;
+	position: relative;
+	height: 30px;
+	margin-bottom: 10px;
+}
+.tag-switch {
+	position: absolute;
+	right: 5px;
+	height: 30px;
+	line-height: 30px;
+}
+.tag-box {
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+	margin-bottom: 15px;
+	max-height: 120px;
+	overflow-y: auto;
+	padding-right: 5px;	
+}
+.tag-box div {
+	height: 30px;
+	padding-left: 5px;
+	border-bottom: black solid 1px;
+	display: flex;
+	align-items: center;
+}
+.sort-container {
+	position: absolute;
+	display: none;
+	right: -30px;
+	top: 40px;
+	z-index: 1;
+	width: 300px;
+	padding: 30px 10px 15px;
+	filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
+}
+.sort-container::after {
+	content: "";
+	position: absolute;
+	top: 15px;
+	left: 0;
+	width: 100%;
+	height: calc(100% - 15px);
+	background-color: white;
+	z-index: -1;             
+	border-radius: 10px;
+}
+.sort-container::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 15px;
+	background-color: white;
+	z-index: -1;
+	clip-path: polygon(72% 15px, 75% 0, 78% 15px);
+}
+.sort-container .sub-title {
+	color: rgb(4,62,128);
+	font-weight: bold;
+	font-size: 12px;
+	margin: 0 0 5px;
+}
+.sort-container label {
+	color: black;
+	font-size: 10px;
+}
+.sort-container .radio-box {
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	margin-bottom: 10px;
+}
+.sort-container .radio-box input {
+	display: block;
+	margin: 0;
+}
+.sort-container .radio-box label {
+	display: block;
+	width: 30px;
+	padding-left: 5px;
+	flex-shrink: 0;
+}
+.create-button {
+	flex-grow: 1;
+	display: flex;
+	justify-content: end;
+}
+.create-button a {
+	display: block;
+	width: 120px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	color: white;
+	background: linear-gradient(to right, rgb(105,174,246), rgb(61,184,210));
+	border-radius: 20px;
+}
+.create-button a span{
+	margin-left:10px;
+}
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+.memo-list {
+	display: flex;
+	flex-wrap: wrap;
+	row-gap: 40px;
+	justify-content: space-between;
+}
+.memo {
+	position: relative;
+	padding: 10px;
+	box-sizing: border-box;
+	width: 23%;
+	border-radius: 10px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+.memo-header {
+	margin-bottom: 20px;
+}
+.memo-title {
+	font-size: 30px;
+	margin: 0;
+	font-weight: bold;
+	color: rgb(4,62,128);
+}
+.memo-menu {
+	position: absolute;
+	right:15px;
+	top: 15px;
+	
+}
+.memo-menu div.switch {
+	width: fit-content;
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: flex;
+}
+.memo-menu .switch span {
+	font-size:14px;
+	display: inline-block;
+	height: 5px;
+	line-height: 5px;
+	width: 8px;
+	text-align: center;
+	font-weight: bold;
+}
+.memo-menu .menu-box {
+	display: none;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+.memo-menu .delete-dialog {
+	display: none;
+	position: fixed;
+	background-color: white;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+}
+.memo dl{
+	display: grid;
+	height: fit-content;
+	gap: 16px;
+	grid-template-columns: 80px 1fr;
+	margin: 0;
+}
+.memo dl dt {
+	background-color: rgb(105,174,246);
+	color: balck;
+	height: 24px;
+	text-align: center;
+	font-weight: bold;	
+}
+.memo dl dd {
+	margin: 0;
+}
+.memo dl dd.flex {
+    gap: 5%;
+	flex-shrink: 0;
+	flex-wrap: wrap;
+}
+.memo dl dd p {
+	width: 30%;
+	margin: 0;
+	border-radius: 20px;
+	color: white;
+	text-align: center;
+	font-size: 14px;
+	height: 24px;
+	line-height: 24px;
+}
+.memo dl dd p:nth-child(3n) {
+	background-color: rgb(78,217,215);
+}
+.memo dl dd p:nth-child(3n+1) {
+	background-color: rgb(99,101,166);
+}	
+.memo dl dd p:nth-child(3n+2) {
+	background-color: rgb(78,126,217);
+}

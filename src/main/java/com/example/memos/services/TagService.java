@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.example.memos.repositories.TagRepository;
 import com.example.memos.models.entities.Tags;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,4 +16,8 @@ public class TagService {
   public List<Tags> findAll(){
     return tagRepository.findAll();
   }
+  
+  public List<Tags> findAllById(List<Long> id){
+	    return tagRepository.findAllById(id);
+	  }
 }

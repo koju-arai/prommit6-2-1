@@ -1,0 +1,21 @@
+<p>メモ登録</p>
+
+<form th:object="${memos}" th:action="@{/create}" method="post">
+<label for="title">タイトル<span>必須</span></label>
+<input type="text" th:field="*{title}" required>
+
+<label for="tagIds">タグ選択</label>
+<ul></ul>
+<div th:each="tag:${tags}">
+<input type="checkbox" name="tagIds" th:value="${tag.id}"><span th:text="${tag.name}"></span>
+</div>
+
+<label for="detail">メモ<span>必須</span></label>
+<textarea th:field="*{detail}" required></textarea>
+
+<div>
+<a th:href="@{/}">キャンセル</a>
+<button type="submit">登録</button>
+</div>
+
+</form>

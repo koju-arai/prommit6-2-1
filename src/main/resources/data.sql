@@ -1,0 +1,14 @@
+INSERT INTO tags (name) VALUES ('仕事');
+INSERT INTO tags (name) VALUES ('タスク');
+INSERT INTO tags (name) VALUES ('報告書');
+INSERT INTO tags (name) VALUES ('勉強法');
+INSERT INTO tags (name) VALUES ('買い物');
+INSERT INTO tags (name) VALUES ('趣味');
+INSERT INTO tags (name) VALUES ('レシピ');
+INSERT INTO tags (name) VALUES ('健康');
+INSERT INTO tags (name) VALUES ('旅行');
+INSERT INTO tags (name) VALUES ('映画');
+INSERT INTO tags (name) VALUES ('音楽');
+INSERT INTO tags (name) VALUES ('読書');
+INSERT INTO tags (name) VALUES ('スポーツ');
+INSERT INTO tags (name) VALUES ('その他');

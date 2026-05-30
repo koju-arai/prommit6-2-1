@@ -1,0 +1,23 @@
+<p>メモ編集</p>
+
+<form th:object="${memos}" th:action="@{/update/{id}(id=${memos.id})}" method="post">
+<input type="hidden" th:field="*{id}">
+<label for="title">タイトル<span>必須</span></label>
+<input type="text" th:field="*{title}" required>
+
+<label for="tagIds">タグ選択</label>
+<ul></ul>
+<div th:each="tag:${tags}">
+<input type="checkbox" name="tagIds" th:value="${tag.id}" th:checked="${memos.tags.![id].contains(tag.id)}">
+<span th:text="${tag.name}"></span>
+</div>
+
+<label for="detail">メモ<span>必須</span></label>
+<textarea th:field="*{detail}" required></textarea>
+
+<div>
+<button>キャンセル</button>
+<button type="submit">登録</button>
+</div>
+
+</form>
