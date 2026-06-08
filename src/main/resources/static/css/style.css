@@ -13,8 +13,15 @@ a {
 	text-decoration: none;
 	color: inherit;
 }
+p {
+	margin: 0;
+}
+button {
+	border: none;
+}
 .flex {
 	display: flex;
+	align-items: center;
 }
 .title {
   border-left: 5px solid blue;
@@ -23,7 +30,11 @@ a {
   align-items: center;
   margin: 0 0 50px 0;
 }
-
+.option {
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+}
 .search-title form {
 	display: flex;
 	align-items: center;
@@ -154,32 +165,75 @@ ul.data-refinement .button-box button[type="submit"] {
     box-sizing: border-box;
 	min-width: 0;
 }
-.tag-display {
+.tag-box{
+	overflow: visible;
+	height: 60px;
+	margin-bottom: 30px;
+	position: relative;
+}
+.selected-tags {
 	border: black solid 1px;
 	position: relative;
-	height: 30px;
-	margin-bottom: 10px;
+	display: flex;
+	column-gap: 10px;
+	justify-content: left;
+	align-items: center;
+	width: 100%;
+	height: 60px;
+	border-radius: 10px;
+	font-size: 16px;
+	padding-left: 20px;
+	box-sizing: border-box;
+	margin-bottom: 30px;
 }
+.selected-tags .selected-tag{
+	width: fit-content;
+	height: fit-content;
+	color: white;
+	border-radius: 20px;
+	padding: 2px 8px;
+}
+.selected-tags li.selected-tag:nth-child(3n) {
+	background-color: rgb(78,217,215);
+}
+.selected-tags li.selected-tag:nth-child(3n+1) {
+	background-color: rgb(99,101,166);
+}	
+.selected-tags li.selected-tag:nth-child(3n+2) {
+	background-color: rgb(78,126,217);
+}
+
 .tag-switch {
 	position: absolute;
 	right: 5px;
 	height: 30px;
-	line-height: 30px;
+	line-height: 60px;
+	width: 40px;
+	display:flex;
+	justify-content: center;
+	align-items: center;
 }
-.tag-box {
+.tags {
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 	margin-bottom: 15px;
 	max-height: 120px;
+	width: 100%;
 	overflow-y: auto;
 	padding-right: 5px;	
+	display: none;
+	border-radius: 10px;
+	
+	z-index: 2;
+	background-color: white;
 }
-.tag-box div {
+.tags div {
 	height: 30px;
 	padding-left: 5px;
 	border-bottom: black solid 1px;
 	display: flex;
 	align-items: center;
 }
+
 .sort-container {
 	position: absolute;
 	display: none;
@@ -274,6 +328,7 @@ ul.data-refinement .button-box button[type="submit"] {
 	padding: 10px;
 	box-sizing: border-box;
 	width: 23%;
+	min-height: 380px;
 	border-radius: 10px;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
@@ -292,14 +347,14 @@ ul.data-refinement .button-box button[type="submit"] {
 	top: 15px;
 	
 }
-.memo-menu div.switch {
+.memo-menu .menu-switch {
 	width: fit-content;
 	position: absolute;
 	right: 0;
 	top: 0;
 	display: flex;
 }
-.memo-menu .switch span {
+.memo-menu .menu-switch span {
 	font-size:14px;
 	display: inline-block;
 	height: 5px;
@@ -311,6 +366,17 @@ ul.data-refinement .button-box button[type="submit"] {
 .memo-menu .menu-box {
 	display: none;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+	position: absolute;
+	top: 15px;
+	right: 0;
+	width: 100px;
+}
+.memo-menu .menu-box li .flex{
+	gap: 10px;
+	padding-left: 20px;
+}
+.memo-menu .menu-box li p{
+	width: fit-content;
 }
 .memo-menu .delete-dialog {
 	display: none;
@@ -318,8 +384,45 @@ ul.data-refinement .button-box button[type="submit"] {
 	background-color: white;
 	top: 50%;
 	left: 50%;
+	width: 600px;
+	border-radius: 10px;
 	transform: translate(-50%, -50%);
 	z-index: 2;
+	text-align: center;
+	padding: 40px;
+}
+.memo-menu .delete-dialog .memo-title{
+	font-size: 24px;
+}
+.memo-menu .delete-dialog .memo-title +p {
+	font-size: 24px;
+	margin: 0 0 40px 0;
+}
+.memo-menu .delete-dialog .delete-cancel {
+	width: 150px;
+	background-color: rgb(157,157,157);
+	color: white;
+	height: 50px;
+	border-radius: 25px;
+	font-size: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.memo-menu .delete-dialog .delete {
+	width: 150px;
+    background-color: rgb(194,91,93);
+	color: white;
+	height: 50px;
+	border-radius: 25px;
+	font-size: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.memo .memo-content{
+	display: inline-block;
+	height: 100%;
 }
 .memo dl{
 	display: grid;
@@ -361,4 +464,34 @@ ul.data-refinement .button-box button[type="submit"] {
 }	
 .memo dl dd p:nth-child(3n+2) {
 	background-color: rgb(78,126,217);
+}
+.memo-box {
+	height: 100%;
+}
+form .label-title {
+	color: rgb(4,62,128);
+	display: block;
+	font-weight: bold;
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+form .label-title span{
+	color: white;
+	background-color: red;
+	font-weight: bold;
+	display: inline-block;
+	width: fit-content;
+	height: fit-content;
+	font-size: 12px;
+	padding: 0 15px;
+	margin-left: 10px;
+	border-radius: 20px;
+}
+form #title {
+	display: block;
+	width: 100%;
+	height: 60px;
+	border-radius: 10px;
+	font-size: 16px;
+	margin-bottom: 30px;
 }
