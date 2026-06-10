@@ -15,12 +15,12 @@
       </div>
     </div>
   </div>
-<label for="detail">メモ<span>必須</span></label>
-<textarea th:field="*{detail}" required></textarea>
+  <label for="detail">メモ<span>必須</span></label>
+  <textarea th:field="*{detail}" required></textarea>
 
-<div>
-<button>キャンセル</button>
-<button type="submit">登録</button>
-</div>
+  <div class="button-box">
+    <a class="cancel" th:href="@{/}">キャンセル</a>
+    <button type="submit">登録</button>
+  </div>
 
 </form>

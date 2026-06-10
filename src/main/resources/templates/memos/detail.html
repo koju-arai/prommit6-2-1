@@ -1,13 +1,15 @@
-<section th:object="${memos}">
-<p th:text="${title}"></p>
-<p>登録日</p>
-<p th:text="${updatedAt}"></p>
-
-<p>タグ</p>
-<ul th:each="tag:${tags}">
-  <li th:text="${tag.name}"></li>
-</ul>
-<p th:text="*{detail}"></p>
-<a th:href="@{/}">戻る</a>
-
+<head th:replace="~{fragments/fragment::head}">
+	
+<section class="memo-detail">
+  <h1 class="detail-title" th:text="${memos.title}"></h1>
+  <dl>
+    <dt>登録日</dt>
+    <dd th:text="${#temporals.format(memos.updatedAt, 'yyyy/M/d HH:mm')}"></dd>
+    <dt>タグ</dt>
+    <dd class="flex"><p th:each="tag:${memos.sortedTags}" th:text="${tag.name}"></p></dd>
+  </dl>
+  <div class="detail-box">
+    <p th:text="${memos.detail}"></p>
+  </div>
+  <a class="back" th:href="@{/}"><i class="fa-regular fa-circle-left"></i><p>戻る</p></a>
 </section>

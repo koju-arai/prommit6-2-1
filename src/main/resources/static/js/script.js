@@ -35,7 +35,6 @@ if($(".data-refinement")){
 	});
 	
 	tagManage();
-	tagSwitch();
 }
 
 if($(".memo-menu")){
@@ -98,7 +97,6 @@ if($(".memo-menu")){
 
 if($(".form-style")){
 	tagManage();
-	tagSwitch();
 };
 function tagSwitch(){
 	const switchEl= $(".tag-switch")
@@ -115,9 +113,15 @@ function tagSwitch(){
 function tagManage(){
 	const tagCheckBoxes = $all('input[name="tagIds"]');
 	const selectedTags = $(".selected-tags");
+			
+	tagCheckBoxes.forEach(checkBox => {
+		checkBox.addEventListener("change",updatedSlectedTags);
+	});
+	updatedSlectedTags();
 	
 	function updatedSlectedTags(){
 		selectedTags.innerHTML = '<span class="tag-switch">▼</span>';
+		tagSwitch();
 		[...tagCheckBoxes]
 		.filter(checkbox => checkbox.checked)
 		.forEach(checkbox => {
@@ -136,12 +140,6 @@ function tagManage(){
 		  selectedTags.append(tagCheckedBox);
 		});
 	};
-			
-	tagCheckBoxes.forEach(checkBox => {
-		checkBox.addEventListener("change",updatedSlectedTags);
-	});
-	updatedSlectedTags();
-
 };
 function $(selectorText, parentElement = document){
     const el = parentElement?.querySelector(selectorText);

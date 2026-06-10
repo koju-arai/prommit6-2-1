@@ -106,7 +106,7 @@
           <dt>登録日</dt>
           <dd th:text="${#temporals.format(memo.updatedAt, 'yyyy/M/d HH:mm')}"></dd>
           <dt>タグ</dt>
-          <dd class="flex"><p th:each="tag:${memo.tags}" th:text="${tag.name}"></p></dd>
+          <dd class="flex"><p th:each="tag:${memo.sortedTags}" th:text="${tag.name}"></p></dd>
         </dl>
         <div class="memo-box">
           <p th:text="${memo.detail}"></p>
