@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head th:replace="~{fragments/fragment::head}">
+<body>
+<h1 class="title">メモ一覧</h1>
+<header>
+  <div class="search-title">
+    <form th:action="@{/}" method="get">
+      <input type="text" name="keyword" placeholder="タイトル検索">
+      <button type="submit">検索</button>
+    </form>
+  </div>
+  <ul class="data-refinement">
+    <li class="filter">
+      <button class="switch" type="button">フィルター</button>
+	  <div class="filter-container">
+        <form th:action="@{/}" method="get">
+          <div class="updated-date">
+            <p class="sub-title">登録日の期間を指定</p>
+			<div class="date-box">
+			  <div class="input-date">	
+              <label for="startAt">開始日</label>
+              <input type="date" name="startDate" id="startAt">
+              </div>
+			  <span>～</span>
+			  <div class="input-date">
+              <label for="endAt">終了日</label>
+              <input type="date" name="endDate" id="endAt">
+			  </div>
+			  <span>まで</span>
+			</div>
+          </div>
+          <div class="tag-selection">
+            <p class="sub-title">タグを指定</p>
+			<div class="tag-box">
+			  <ul class="selected-tags"><span class="tag-switch">▼</span></ul>
+			  <div class="tags">
+			    <div th:each="tag:${tags}">
+			    <input type="checkbox" name="tagIds" th:value="${tag.id}" th:data-tag-name="${tag.name}">
+			    <span th:text="${tag.name}"></span>
+			    </div>
+			  </div>
+			</div>
+          </div>
+		  <div class="button-box">
+            <button class="cancel" type="button">キャンセル</button>
+            <button type="submit">完了</button>
+		  </div>
+        </form>
+      </div>
+	</li>
+    <li class="sort">
+	  <button class="switch">ソート</button>
+      <div class="sort-container">
+        <form th:action="@{/}" method="get">
+          <p class="sub-title">登録日</p>
+		  <div class="radio-box">
+            <input type="radio" name="sort" id="asc" value="0">
+		    <label for="asc">昇順</label>
+            <input type="radio" name="sort" id="dsc" value="1">
+		    <label for="dsc">降順</label>
+		  </div>
+		  <div class="button-box">
+		    <button class="cancel" type="button">キャンセル</button>
+		    <button type="submit">完了</button>
+		  </div>
+        </form>
+      </div>
+	</li>
+  </ul>
+  <div class="create-button">
+    <a th:href="@{/create}">新規登録<span>⊕</span></a>
+  </div>
+</header>
+<section>
+  <div class="overlay"></div>
+  <ul class="memo-list">
+    <li class="memo" th:each="memo:${memos}">
+      <div class="memo-header">
+        <p class="memo-title" th:text="${memo.title}"></p>
+        <div class="memo-menu">
+		  <div class="menu-switch"><span>・</span><span>・</span><span>・</span></div>
+		  <ul class="menu-box">
+            <li class="delete">
+              <div class="delete-switch flex"><i class="fa-solid fa-trash"></i><p>削除</p></div>
+            </li>
+            <li>
+              <a th:href="@{/update/{id}(id=${memo.id})}"><div class="flex"><i class="fa-solid fa-pen"></i><p>編集</p></div></a>
+            </li>
+          </ul>
+		  <div class="delete-dialog">
+		    <p class="memo-title" th:text="${memo.title}"></p>
+		    <p>を削除しますか</p>
+			<div class="option">
+		      <p class="delete-cancel">キャンセル</p>
+		      <form th:action="@{/delete}" method="get">
+		        <input type="hidden" name="id" th:value="${memo.id}">
+		        <button class="delete" type="submit">削除</button>
+		      </form>
+			</div>
+		  </div>
+		</div>
+      </div>
+	  <a class="memo-content" th:href="@{/detail/{id}(id=${memo.id})}">
+        <dl>
+          <dt>登録日</dt>
+          <dd th:text="${#temporals.format(memo.updatedAt, 'yyyy/M/d HH:mm')}"></dd>
+          <dt>タグ</dt>
+          <dd class="flex"><p th:each="tag:${memo.sortedTags}" th:text="${tag.name}"></p></dd>
+        </dl>
+        <div class="memo-box">
+          <p th:text="${memo.detail}"></p>
+        </div>
+	  </a>
+    </li>
+  </ul>
+</section>
+</body>

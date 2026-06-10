@@ -1,0 +1,25 @@
+<head th:replace="~{fragments/fragment::head}">
+<h1 class="title">メモ登録</h1>
+
+<form class="form-style" th:object="${memos}" th:action="@{/}" method="post">
+  <label class="label-title" for="title">タイトル<span>必須</span></label>
+  <input type="text" th:field="*{title}" required>
+  <label class="label-title" for="tagIds">タグ選択</label>
+  <div class="tag-box">
+    <ul class="selected-tags"><span class="tag-switch">▼</span></ul>
+    <div class="tags">
+      <div th:each="tag:${tags}">
+      <input type="checkbox" name="tagIds" th:value="${tag.id}" th:data-tag-name="${tag.name}">
+      <span th:text="${tag.name}"></span>
+      </div>
+    </div>
+  </div>
+  <label for="detail" class="label-title">メモ<span>必須</span></label>
+  <textarea th:field="*{detail}" required></textarea>
+
+  <div class="button-box">
+    <a class="cancel" th:href="@{/}">キャンセル</a>
+    <button type="submit">登録</button>
+  </div>
+
+</form>

@@ -18,21 +18,21 @@ public class MemoSpecification {
            criteriaBuilder.like(root.get("title"), "%" + keyword + "%");
   }
   
-  public static Specification<Memos> createdAtAfter(LocalDateTime startAt) {
+  public static Specification<Memos> createdAtAfter(LocalDateTime startDateTime) {
 	return (root, query, criteriaBuilder) ->
-	criteriaBuilder.greaterThanOrEqualTo(root.get("createdAt"), startAt);
+	  criteriaBuilder.greaterThanOrEqualTo(root.get("updatedAt"), startDateTime);
   }
   
-  public static Specification<Memos> createdAtBefore(LocalDateTime endAt) {
+  public static Specification<Memos> createdAtBefore(LocalDateTime endDateTime) {
 	return (root, query, criteriaBuilder) ->
-		   criteriaBuilder.lessThanOrEqualTo(root.get("createdAt"), endAt);
+	  criteriaBuilder.lessThanOrEqualTo(root.get("updatedAt"), endDateTime);
   }
   
   public static Specification<Memos> hasTag(List<Long> tagIds) {
 	return (root, query, criteriaBuilder) ->{
-	       query.distinct(true);
-	       Join<Memos, Tags> tagsJoin = root.join("tags");
-	       return tagsJoin.get("id").in(tagIds);
-		};
-  }  
+	  query.distinct(true);
+	  Join<Memos, Tags> tagsJoin = root.join("tags");
+	  return tagsJoin.get("id").in(tagIds);
+	};
+  }
 }

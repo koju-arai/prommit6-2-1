@@ -2,6 +2,7 @@ package com.example.memos.models.entities;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
@@ -11,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
+import java.util.Comparator;
 
 @Getter
 @Setter
@@ -33,4 +35,9 @@ public class Memos extends BaseEntity {
   )
   private Set<Tags> tags = new HashSet<>();
   
+  public List<Tags> getSortedTags() {
+      return tags.stream()
+              .sorted(Comparator.comparing(Tags::getId))
+              .toList();
+  }
 }
