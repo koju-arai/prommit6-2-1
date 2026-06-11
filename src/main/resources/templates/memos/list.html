@@ -85,7 +85,7 @@
               <div class="delete-switch flex"><i class="fa-solid fa-trash"></i><p>削除</p></div>
             </li>
             <li>
-              <a th:href="@{/update/{id}(id=${memo.id})}"><div class="flex"><i class="fa-solid fa-pen"></i><p>編集</p></div></a>
+              <a th:href="@{/{id}/edit(id=${memo.id})}"><div class="flex"><i class="fa-solid fa-pen"></i><p>編集</p></div></a>
             </li>
           </ul>
 		  <div class="delete-dialog">
@@ -93,7 +93,7 @@
 		    <p>を削除しますか</p>
 			<div class="option">
 		      <p class="delete-cancel">キャンセル</p>
-		      <form th:action="@{/delete}" method="get">
+		      <form th:action="@{/{id}/delete(id=${memo.id})}" method="post">
 		        <input type="hidden" name="id" th:value="${memo.id}">
 		        <button class="delete" type="submit">削除</button>
 		      </form>
@@ -101,7 +101,7 @@
 		  </div>
 		</div>
       </div>
-	  <a class="memo-content" th:href="@{/detail/{id}(id=${memo.id})}">
+	  <a class="memo-content" th:href="@{/{id}(id=${memo.id})}">
         <dl>
           <dt>登録日</dt>
           <dd th:text="${#temporals.format(memo.updatedAt, 'yyyy/M/d HH:mm')}"></dd>

@@ -39,15 +39,17 @@ public class MemoController {
 	@RequestParam(name = "endDate", required = false)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     LocalDate endDate,
-	@RequestParam(name = "sort", required = false) Long sort,
+	@RequestParam(name = "sort", required = false) Integer sort,
     Model model) {
-	  List<Memos> memos = memoService.findMemo(keyword, tagIds, startDate, endDate, sort);
+	  
+	  List<Memos> memos = memoService.findAll(keyword, tagIds, startDate, endDate, sort);
 	  model.addAttribute("memos", memos);
 	  model.addAttribute("tags",tagService.findAll());
 	  return "memos/list";
+	  
   }
   
-  @GetMapping("/detail/{id}")
+  @GetMapping("/{id}")
   public String getMemoById(
   @PathVariable(name="id") Long id,
   Model model) {
@@ -56,7 +58,7 @@ public class MemoController {
     return "memos/detail";
   }
   
-  @GetMapping("/delete")
+  @PostMapping("/{id}/delete")
   public String deleteMemo(
   @RequestParam(name="id", required = true) Long id) {
     memoService.deleteById(id);
@@ -88,7 +90,7 @@ public class MemoController {
       return "redirect:/";
   }
   
-  @GetMapping("/update/{id}")
+  @GetMapping("/{id}/edit")
   public String getUpdatePage(
     @PathVariable(name="id") Long id,
     Model model) {
@@ -97,7 +99,7 @@ public class MemoController {
 	  model.addAttribute("tags", tagService.findAll());
 	  return "memos/update";
   }
-  @PostMapping("/update/{id}")
+  @PostMapping("/{id}/edit")
   public String postUpdatePage(
 	  @PathVariable(name="id") Long id,
 	  @RequestParam(name="tagIds") List<Long> tagIds,
