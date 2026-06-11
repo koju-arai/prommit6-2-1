@@ -1,7 +1,7 @@
 <head th:replace="~{fragments/fragment::head}">
 <h1 class="title">メモ編集</h1>
 
-<form class="form-style" th:object="${memos}" th:action="@{/update/{id}(id=${memos.id})}" method="post">
+<form class="form-style" th:object="${memos}" th:action="@{/{id}/edit(id=${memos.id})}" method="post">
   <input type="hidden" th:field="*{id}">
   <label class="label-title" for="title">タイトル<span>必須</span></label>
   <input type="text" th:field="*{title}" required>

@@ -18,10 +18,6 @@ public class MemoService {
   @Autowired
   private MemoRepository memoRepository;
   
-  public List<Memos> findAll(){
-	return memoRepository.findAll();
-  }
-  
   public Optional<Memos> findById(Long id){
 	return memoRepository.findById(id);
   }
@@ -36,7 +32,7 @@ public class MemoService {
 	memoRepository.save(memo); 
   }
 
-  public List<Memos> findMemo(String keyword, List<Long>tagIds, LocalDate startDate, LocalDate endDate, Long sort){
+  public List<Memos> findAll(String keyword, List<Long>tagIds, LocalDate startDate, LocalDate endDate, Integer sort){
 
     Specification<Memos> spec = MemoSpecification.isNotDeleted();
     
@@ -63,7 +59,7 @@ public class MemoService {
     return memoRepository.findAll(spec, sortCondition);
   }
   
-  public Sort createSort(Long sort) {
+  public Sort createSort(Integer sort) {
 
 	if(sort != null && sort == 0) {
 	  return Sort.by(Sort.Direction.ASC, "updatedAt");
