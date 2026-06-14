@@ -376,6 +376,8 @@ ul.data-refinement .button-box button[type="submit"] {
 	top: 15px;
 	right: 0;
 	width: 100px;
+	background-color: white;
+	z-index: 1;
 }
 .memo-menu .menu-box li .flex{
 	gap: 10px;
@@ -501,6 +503,11 @@ form.form-style #title {
 	border-radius: 10px;
 	font-size: 16px;
 	margin-bottom: 30px;
+}
+form.form-style .title-error {
+	color: red;
+	margin-top: -20px;
+	font-weight:bold;
 }
 form.form-style textarea {
 	width: 100%;

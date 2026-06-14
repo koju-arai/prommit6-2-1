@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Optional;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 
 
 @Controller
@@ -34,11 +36,9 @@ public class MemoController {
     @RequestParam(name = "keyword", required = false) String keyword,
 	@RequestParam(name = "tagIds", required = false) List<Long> tagIds,
 	@RequestParam(name = "startDate", required = false)
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    LocalDate startDate,
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate startDate,
 	@RequestParam(name = "endDate", required = false)
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    LocalDate endDate,
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate endDate,
 	@RequestParam(name = "sort", required = false) Integer sort,
     Model model) {
 	  
@@ -74,9 +74,16 @@ public class MemoController {
   
   @PostMapping("/create")
   public String postCreatePage(
-    @ModelAttribute Memos memos,
+	@Valid @ModelAttribute Memos memos,
+	BindingResult bindingResult,
     @RequestParam(name = "tagIds", required = false) List<Long> tagIds,
     Model model) {
+	  
+	  if (bindingResult.hasErrors()) {
+	    model.addAttribute("tags", tagService.findAll());
+	    return "memos/create";
+	  }
+	  
 	  memos.setCreatedAt(LocalDateTime.now());
 	  memos.setUpdatedAt(LocalDateTime.now());
 	  memos.setDeleted(false);
@@ -102,10 +109,18 @@ public class MemoController {
   @PostMapping("/{id}/edit")
   public String postUpdatePage(
 	  @PathVariable(name="id") Long id,
-	  @RequestParam(name="tagIds") List<Long> tagIds,
-	  @ModelAttribute Memos formMemo, 
+	  @RequestParam(name="tagIds", required = false) List<Long> tagIds,
+	  @Valid @ModelAttribute Memos formMemo,
+	  BindingResult bindingResult,
 	  Model model) {
-	  Memos memos = memoService.findById(formMemo.getId()).orElseThrow();
+	  
+	  if (bindingResult.hasErrors()) {
+	    formMemo.setId(id);
+	    model.addAttribute("tags", tagService.findAll());
+	    return "memos/update";
+	  }
+	  
+	  Memos memos = memoService.findById(id).orElseThrow();
 	  memos.setUpdatedAt(LocalDateTime.now());
 	  memos.setTitle(formMemo.getTitle());
 	  memos.setDetail(formMemo.getDetail());

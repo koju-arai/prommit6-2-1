@@ -6,6 +6,7 @@ import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn;
@@ -21,7 +22,11 @@ import java.util.Comparator;
 @Table(name = "memos")
 public class Memos extends BaseEntity {
   
-  @Column(name = "title", length = 255, nullable = false)
+  @Size(max = 255,
+    message = "255字以内で入力してください。")
+  @Column(name = "title",
+    length = 255,
+    nullable = false)
   private String title;
 
   @Column(columnDefinition = "TEXT", nullable = false, name = "body")
