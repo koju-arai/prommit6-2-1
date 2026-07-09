@@ -3,9 +3,11 @@
 
 <form class="form-style" th:object="${memos}" th:action="@{/{id}/edit(id=${memos.id})}" method="post">
   <input type="hidden" th:field="*{id}">
+  
   <label class="label-title" for="title">タイトル<span>必須</span></label>
   <input type="text" th:field="*{title}" required>
   <div class="title-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+  
   <label class="label-title" for="tagIds">タグ選択</label>
   <div class="tag-box">
     <ul class="selected-tags"><span class="tag-switch">▼</span></ul>
