@@ -134,7 +134,7 @@ class MemoServiceTest {
 		
 		List<Memos> result = memoService.findAll(null, null, null, null, null);
 		
-		assertEquals(result.size(), 2);
+		assertEquals(2, result.size());
 		
 		ArgumentCaptor<Sort> sortCaptor = ArgumentCaptor.forClass(Sort.class);
 		verify(memoRepository).findAll(
@@ -166,7 +166,7 @@ class MemoServiceTest {
 			LocalDate.of(2026, 7, 1),
 			0);
 		
-		assertEquals(result.size(), 2);
+		assertEquals(2, result.size());
 		
 		ArgumentCaptor<Sort> sortCaptor = ArgumentCaptor.forClass(Sort.class);
 		verify(memoRepository).findAll(
