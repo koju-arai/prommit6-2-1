@@ -54,6 +54,9 @@ public class MemoController {
   @PathVariable(name="id") Long id,
   Model model) {
     Optional<Memos> memos = memoService.findById(id);
+    if(memos.isEmpty()) {
+    	return "redirect:/";
+    }
     model.addAttribute("memos", memos.orElseThrow());
     return "memos/detail";
   }
@@ -79,19 +82,22 @@ public class MemoController {
     @RequestParam(name = "tagIds", required = false) List<Long> tagIds,
     Model model) {
 	  
+	  if(tagIds != null) {
+			Set<Tags> selectedTags = new HashSet<>(tagService.findAllById(tagIds));
+			memos.setTags(selectedTags);
+	  } else {
+		  memos.setTags(new HashSet<>());	  
+	  }
+	  
 	  if (bindingResult.hasErrors()) {
 	    model.addAttribute("tags", tagService.findAll());
+	    model.addAttribute("selectedTagIds", tagIds != null ? tagIds : List.of());
 	    return "memos/create";
 	  }
 	  
 	  memos.setCreatedAt(LocalDateTime.now());
 	  memos.setUpdatedAt(LocalDateTime.now());
 	  memos.setDeleted(false);
-	  
-	  if(tagIds != null) {
-		Set<Tags> selectedTags = new HashSet<>(tagService.findAllById(tagIds));
-		memos.setTags(selectedTags);
-	  }
 	  
 	  memoService.save(memos);
       return "redirect:/";
@@ -128,6 +134,8 @@ public class MemoController {
 	  if(tagIds != null) {
 		Set<Tags> selectedTags = new HashSet<>(tagService.findAllById(tagIds));
 		memos.setTags(selectedTags);
+	  } else {
+		  memos.setTags(new HashSet<>());
 	  }
 	  
 	  memoService.save(memos);

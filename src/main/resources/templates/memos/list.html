@@ -77,7 +77,9 @@
   <ul class="memo-list">
     <li class="memo" th:each="memo:${memos}">
       <div class="memo-header">
-        <p class="memo-title" th:text="${memo.title}"></p>
+        <p class="memo-title" th:text="${memo.title != null and #strings.length(memo.title) > 50
+		  ? #strings.substring(memo.title, 0, 50) + '...'
+	      : memo.title}"></p>
         <div class="memo-menu">
 		  <div class="menu-switch"><span>・</span><span>・</span><span>・</span></div>
 		  <ul class="menu-box">
@@ -109,7 +111,9 @@
           <dd class="flex"><p th:each="tag:${memo.sortedTags}" th:text="${tag.name}"></p></dd>
         </dl>
         <div class="memo-box">
-          <p th:text="${memo.detail}"></p>
+          <p class="memo-text" th:text="${memo.detail != null and #strings.length(memo.detail) > 200
+		  ? #strings.substring(memo.detail, 0, 200) + '...'
+	      : memo.detail}"></p>
         </div>
 	  </a>
     </li>

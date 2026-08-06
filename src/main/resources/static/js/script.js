@@ -62,7 +62,10 @@ if($(".memo-menu")){
 	
   $all(".menu-box .delete-switch").forEach((switchEl)=>{
 	switchEl.addEventListener("click",(event)=>{
-		
+	  
+	  switchEl.closest(".menu-box").classList.remove("open");
+	  switchEl.closest(".menu-box").style.display = "none";
+	  
 	  const contentEl = $(".delete-dialog" ,switchEl.closest(".memo-menu"))
 		
       contentEl.classList.toggle("open");
@@ -123,14 +126,16 @@ function tagManage(){
 	selectedTags.innerHTML = '<span class="tag-switch">▼</span>';
 	tagSwitch();
 	[...tagCheckBoxes]
-	  .filter(checkbox => checkbox.checked)
+	  .filter(checkbox => checkbox.checked) 
+	  //チェックボックスでチェック済のものに限定して、"selectedTags"で表示するものをつくっている。tagIdsは関係していない
 	  .forEach(checkbox => {
 		const htmlTagCheckedBox = `
 		  <li class="selected-tag">
 		    <span class="tag-cancel">×</span>
-			<span class="selected-tag-name">${checkbox.dataset.tagName}</span>	    
+			<span class="selected-tag-name">${checkbox.dataset.tagName}</span> 
 		  </li>
 		`;
+		//テンプレートのth:data-tag-nameがセットされている
 		const tagCheckedBox = htmlStrToSingleElement(htmlTagCheckedBox);
 		const tagCancel =  $(".tag-cancel", tagCheckedBox);
 		tagCancel.addEventListener("click", ()=>{

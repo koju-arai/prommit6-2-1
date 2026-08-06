@@ -9,7 +9,7 @@
     <dd class="flex"><p th:each="tag:${memos.sortedTags}" th:text="${tag.name}"></p></dd>
   </dl>
   <div class="detail-box">
-    <p th:text="${memos.detail}"></p>
+    <p class="memo-text" th:text="${memos.detail}"></p>
   </div>
   <a class="back" th:href="@{/}"><i class="fa-regular fa-circle-left"></i><p>戻る</p></a>
 </section>

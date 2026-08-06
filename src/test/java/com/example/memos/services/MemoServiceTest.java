@@ -46,7 +46,6 @@ class MemoServiceTest {
 	@DisplayName("findByIdの引数が存在しないIDの場合、何も返さない")
 	@Test
 	void testFindById_存在しないID() {
-		Memos memo = new Memos();
 		when(memoRepository.findById(999L))
 			.thenReturn(Optional.empty());
 		
@@ -142,13 +141,13 @@ class MemoServiceTest {
 				sortCaptor.capture()
 		);
 		Sort sort = sortCaptor.getValue();
-		Sort.Order oder = sort.getOrderFor("updatedAt");
+		Sort.Order order = sort.getOrderFor("updatedAt");
 		
-		assertNotNull(oder);
-		assertEquals(Sort.Direction.DESC, oder.getDirection());
+		assertNotNull(order);
+		assertEquals(Sort.Direction.DESC, order.getDirection());
 	}
 	
-	@DisplayName("findAllの検索条件ありでsort = 0の場合、isDeletedがfalseのものが, 降順で一覧表示")
+	@DisplayName("findAllの検索条件ありでsort = 0の場合、isDeletedがfalseのものが, 昇順で一覧表示")
 	@Test
 	void  testFindAll_sort_0() {
 		Memos memo1 = new Memos();
@@ -174,10 +173,10 @@ class MemoServiceTest {
 				sortCaptor.capture()
 		);
 		Sort sort = sortCaptor.getValue();
-		Sort.Order oder = sort.getOrderFor("updatedAt");
+		Sort.Order order = sort.getOrderFor("updatedAt");
 		
-		assertNotNull(oder);
-		assertEquals(Sort.Direction.ASC, oder.getDirection());
+		assertNotNull(order);
+		assertEquals(Sort.Direction.ASC, order.getDirection());
 	}
 
 }

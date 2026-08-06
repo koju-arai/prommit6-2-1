@@ -35,6 +35,9 @@ button {
 	gap: 20px;
 	justify-content: center;
 }
+.memo-text {
+	white-space: pre-wrap;
+}
 .search-title form {
 	display: flex;
 	align-items: center;

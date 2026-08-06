@@ -11,13 +11,13 @@
     <ul class="selected-tags"><span class="tag-switch">▼</span></ul>
     <div class="tags">
       <div th:each="tag:${tags}">
-      <input type="checkbox" name="tagIds" th:value="${tag.id}" th:data-tag-name="${tag.name}">
+      <input type="checkbox" name="tagIds" th:value="${tag.id}" th:data-tag-name="${tag.name}" th:checked="${selectedTagIds != null and selectedTagIds.contains(tag.id)}">
       <span th:text="${tag.name}"></span>
       </div>
     </div>
   </div>
   <label for="detail" class="label-title">メモ<span>必須</span></label>
-  <textarea th:field="*{detail}" required></textarea>
+  <textarea class="memo-text" th:field="*{detail}" required></textarea>
 
   <div class="button-box">
     <a class="cancel" th:href="@{/}">キャンセル</a>

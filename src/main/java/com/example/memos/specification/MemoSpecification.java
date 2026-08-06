@@ -14,8 +14,11 @@ public class MemoSpecification {
   }
 
   public static Specification<Memos> containsKey(String keyword) {
-    return (root, query, criteriaBuilder) ->
-           criteriaBuilder.like(root.get("title"), "%" + keyword + "%");
+    
+	String escapedKeyword = escapeKeyword(keyword);
+	  
+	return (root, query, criteriaBuilder) ->
+      criteriaBuilder.like(root.get("title"), "%" + escapedKeyword + "%", '\\');
   }
   
   public static Specification<Memos> createdAtAfter(LocalDateTime startDateTime) {
@@ -34,5 +37,12 @@ public class MemoSpecification {
 	  Join<Memos, Tags> tagsJoin = root.join("tags");
 	  return tagsJoin.get("id").in(tagIds);
 	};
+  }
+  
+  public static String escapeKeyword(String keyword) {
+    return keyword
+    	     .replace("\\", "\\\\")
+    	     .replace("%", "\\%")
+    	     .replace("_", "\\_");
   }
 }
